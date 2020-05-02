@@ -1,13 +1,13 @@
-package com.bezkoder.spring.datajpa;
+package com.university.organization;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootDataJpaApplication {
+public class ServingWebContentApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootDataJpaApplication.class, args);
+		SpringApplication.run(ServingWebContentApplication.class, args);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.bezkoder.spring.datajpa;
+package com.university.organization;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

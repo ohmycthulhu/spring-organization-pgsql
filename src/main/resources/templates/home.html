@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <!-- Header -->
+        <a href="/" class="col-3">
+            Home
+        </a>
+        <a href="/new" class="col-3">
+            New +
+        </a>
+        <a href="/statistics" class="col-3">
+            Statistics
+        </a>
+    </div>
+    <div>
+        <h4>
+            Employees
+        </h4>
+    </div>
+    <div>
+        <form class="row"
+              action="/"
+              data-ignore="true"
+        >
+            <div class="col-6 col-md-3">
+                <input type="text"
+                       name="name"
+                       th:value="${name}"
+                       placeholder="Name"
+                       class="form-control">
+            </div>
+            <div class="col-6 col-md-3">
+                <input type="text"
+                       name="group"
+                       th:value="${group}"
+                       placeholder="Group"
+                       class="form-control">
+            </div>
+            <div class="col-6 col-md-3">
+                <input type="text"
+                       name="bossName"
+                       th:value="${bossName}"
+                       placeholder="Boss"
+                       class="form-control">
+            </div>
+            <div class="col-6 col-md-3">
+                <button class="btn btn-outline-success"
+                        type="submit"
+                >
+                    Search
+                </button>
+                <a href="/">
+                    <button class="btn btn-outline-danger">
+                        Clear
+                    </button>
+                </a>
+            </div>
+        </form>
+        <!-- Search section -->
+    </div>
+    <div>
+        <!-- Employees data -->
+        <table class="table">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Sex
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    Group
+                </th>
+                <th>
+                    Position
+                </th>
+                <th>
+                    Salary
+                </th>
+                <th>
+                    Birth date
+                </th>
+                <th>
+                    Hire date
+                </th>
+                <th>
+                    Boss
+                </th>
+                <th></th>
+            </tr>
+            <th:block th:each="employee : ${employees}">
+                <tr>
+                    <td th:text="${employee.getId()}"></td>
+                    <td th:text="${employee.getName()}"/>
+                    <td th:text="${employee.getSex()}"/>
+                    <td th:text="${employee.getPhone()}"></td>
+                    <td th:text="${employee.getGroup()}"></td>
+                    <td th:text="${employee.getPosition()}"></td>
+                    <td th:text="${employee.getSalary()}"></td>
+                    <td th:text="${employee.getBirthdate()}"></td>
+                    <td th:text="${employee.getHireDate()}"></td>
+                    <td th:text="${employee.getBossName()}"></td>
+                    <td>
+                        <a th:href="'/' + ${employee.getId()} + '/edit'"
+                           class="btn btn-outline-info"
+                        >Edit</a>
+                        <form th:action="'/' + ${employee.getId()} + '/delete'"
+                              method="post"
+                              data-ask="true"
+                        >
+                            <button type="submit"
+                                    class="btn btn-outline-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</div>
+<script src="/jquery-3.5.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="/script.js"></script>
+</body>
+</html>
