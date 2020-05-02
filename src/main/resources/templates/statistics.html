@@ -85,7 +85,6 @@
                 <th>
                     Boss
                 </th>
-                <th></th>
             </tr>
             <th:block th:each="employee : ${mostPaid}">
                 <tr>
@@ -99,18 +98,6 @@
                     <td th:text="${employee.getBirthdate()}"></td>
                     <td th:text="${employee.getHireDate()}"></td>
                     <td th:text="${employee.getBossName()}"></td>
-                    <td>
-                        <a th:href="'/' + ${employee.getId()} + '/edit'"
-                           class="btn btn-outline-info"
-                        >Edit</a>
-                        <form th:action="'/' + ${employee.getId()} + '/delete'"
-                              method="post"
-                              data-ask="true"
-                        >
-                            <button type="submit"
-                                    class="btn btn-outline-danger">Delete</button>
-                        </form>
-                    </td>
                 </tr>
             </th:block>
         </table>
@@ -152,7 +139,6 @@
                 <th>
                     Boss
                 </th>
-                <th></th>
             </tr>
             <th:block th:each="employee : ${mostYears}">
                 <tr>
@@ -166,18 +152,6 @@
                     <td th:text="${employee.getBirthdate()}"></td>
                     <td th:text="${employee.getHireDate()}"></td>
                     <td th:text="${employee.getBossName()}"></td>
-                    <td>
-                        <a th:href="'/' + ${employee.getId()} + '/edit'"
-                           class="btn btn-outline-info"
-                        >Edit</a>
-                        <form th:action="'/' + ${employee.getId()} + '/delete'"
-                              method="post"
-                              data-ask="true"
-                        >
-                            <button type="submit"
-                                    class="btn btn-outline-danger">Delete</button>
-                        </form>
-                    </td>
                 </tr>
             </th:block>
         </table>
