@@ -3,6 +3,7 @@ $('form').submit(function (event) {
         return;
     }
 
+    console.log('Starting')
     event.preventDefault();
 
     if ($(this).data('ask') && !confirm('Are you sure?')) {
@@ -35,12 +36,13 @@ $('form').submit(function (event) {
       type: "POST",
       url,
       data: JSON.stringify(resultData),
-      success () {
+      success (data) {
         if (location.href === destination) {
             location.reload(false);
         } else {
-            location.href = '/';
+            location.href = '/home';
         }
+        console.log('something', data)
       },
       error ({ status }) {
         console.log(status)
@@ -54,6 +56,7 @@ $('form').submit(function (event) {
                 location.href = '/';
             }
         }
+        console.log('Somehow')
       },
       dataType: "json",
       contentType : "application/json",

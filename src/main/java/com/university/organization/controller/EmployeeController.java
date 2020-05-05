@@ -2,6 +2,7 @@ package com.university.organization.controller;
 
 import com.university.organization.model.AverageSalary;
 import com.university.organization.model.Employee;
+import com.university.organization.model.LoginForm;
 import com.university.organization.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +26,45 @@ public class EmployeeController {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    private static String loginToken = "mi83ctepta";
+
     @GetMapping("/")
+    public RedirectView getPage(
+            @CookieValue(name = "token", defaultValue = "") String token,
+            @RequestParam(name = "token", required = false) String queryToken,
+            RedirectAttributes attributes
+    ) {
+        if (token.equals(loginToken) || (queryToken != null && queryToken.equals("mi83ctepta"))) {
+            return new RedirectView("/home");
+        } else {
+            return new RedirectView("/login");
+        }
+    }
+
+    @GetMapping("/login")
+    public String getLoginPage(
+            Model model
+    ) {
+        return "login";
+    }
+
+    @GetMapping("/login-action")
+    public RedirectView loginUser(
+        @RequestParam(required = true, name = "login") String login,
+        @RequestParam(required = true, name = "password") String password,
+        HttpServletResponse response,
+        Model model
+    ) {
+        if (login.equals("admin") && password.equals("admin")) {
+            Cookie cookie = new Cookie("token", loginToken);
+            response.addCookie(cookie);
+            return new RedirectView("/");
+        } else {
+            return new RedirectView("/login");
+        }
+    }
+
+    @GetMapping("/home")
     public String getAllTutorials(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String group,
